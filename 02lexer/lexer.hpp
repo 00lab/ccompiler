@@ -1,5 +1,7 @@
 #ifndef LEXER_HPP
 #define LEXER_HPP
+#include <stdio.h>
+#include <string.h>
 
 enum TokenType {
   T_INIT,
@@ -19,7 +21,7 @@ public:
   int length;
 
   Token(TokenType tt, const char* v, int len);
-  void print();
+  void Print();
 };
 
 enum State {
@@ -39,6 +41,8 @@ class Lexer {
 public:
   Lexer(const char* src);
   Token *Next();
+  inline char GetChar() { return src[index++]; }
+  inline void UnGetC() { --index; }
 
 private:
   const char *src;
